@@ -1,26 +1,225 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Primary — Deep Emerald Green */
+  --color-emerald-50: #e8f5ee;
+  --color-emerald-100: #c5e6d3;
+  --color-emerald-200: #9ed4b5;
+  --color-emerald-300: #6fbe93;
+  --color-emerald-400: #4aa876;
+  --color-emerald-500: #1d7a4e;
+  --color-emerald-600: #165e3b;
+  --color-emerald-700: #0F3D2E;
+  --color-emerald-800: #0a2e21;
+  --color-emerald-900: #061f16;
+
+  /* Gold Accent */
+  --color-gold-300: #dbc47a;
+  --color-gold-400: #d4b85e;
+  --color-gold-500: #C8A951;
+  --color-gold-600: #b39542;
+  --color-gold-700: #967b36;
+
+  /* Calm Blue */
+  --color-blue-400: #4a8aaa;
+  --color-blue-500: #377da0;
+  --color-blue-600: #2C5F7C;
+  --color-blue-700: #224b63;
+
+  /* Sand */
+  --color-sand-100: #f5efe4;
+  --color-sand-200: #EADBC8;
+  --color-sand-300: #dcc9ac;
+  --color-sand-400: #c9b18e;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+  --font-arabic: var(--font-amiri);
 }
 
+/* Light mode */
+:root {
+  --background: #F8F9F5;
+  --foreground: #222222;
+  --surface-elevated: #ffffff;
+  --surface-card: #EADBC8;
+  --text-secondary: #555555;
+  --text-tertiary: #888888;
+  --border-color: #d9d3c7;
+  --gold: #C8A951;
+}
+
+/* Dark mode: class-based OR OS preference */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light) {
+    --background: #1A1A1A;
+    --foreground: #f0ede6;
+    --surface-elevated: #242420;
+    --surface-card: #2a2a24;
+    --text-secondary: #b0a998;
+    --text-tertiary: #7a7468;
+    --border-color: #3a3830;
+    --gold: #C8A951;
   }
+}
+
+:root.dark {
+  --background: #1A1A1A;
+  --foreground: #f0ede6;
+  --surface-elevated: #242420;
+  --surface-card: #2a2a24;
+  --text-secondary: #b0a998;
+  --text-tertiary: #7a7468;
+  --border-color: #3a3830;
+  --gold: #C8A951;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Arabic text defaults */
+[lang="ar"] {
+  font-family: var(--font-amiri), "Traditional Arabic", serif;
+  direction: rtl;
+  line-height: 2;
+}
+
+/* Islamic geometric pattern — subtle background decoration */
+.geo-pattern {
+  position: relative;
+}
+.geo-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230F3D2E' stroke-width='0.8'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Cpath d='M40 10 L70 40 L40 70 L10 40Z'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3Cpath d='M20 0 L40 20 M60 0 L40 20 M80 20 L60 40 M80 60 L60 40 M60 80 L40 60 M20 80 L40 60 M0 60 L20 40 M0 20 L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  z-index: 0;
+}
+.geo-pattern > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode pattern variant */
+:root.dark .geo-pattern::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A951' stroke-width='0.8'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Cpath d='M40 10 L70 40 L40 70 L10 40Z'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3Cpath d='M20 0 L40 20 M60 0 L40 20 M80 20 L60 40 M80 60 L60 40 M60 80 L40 60 M20 80 L40 60 M0 60 L20 40 M0 20 L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.04;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .geo-pattern::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A951' stroke-width='0.8'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Cpath d='M40 10 L70 40 L40 70 L10 40Z'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3Cpath d='M20 0 L40 20 M60 0 L40 20 M80 20 L60 40 M80 60 L60 40 M60 80 L40 60 M20 80 L40 60 M0 60 L20 40 M0 20 L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.04;
+  }
+}
+
+/* Bismillah reveal animation on landing page */
+.bismillah-reveal {
+  animation: bismillahReveal 1.8s ease-out;
+}
+
+@keyframes bismillahReveal {
+  0% { opacity: 0; letter-spacing: 0.3em; filter: blur(4px); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; letter-spacing: normal; }
+}
+
+/* Smooth transitions for reflection flow */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide transitions for reflection steps */
+.slide-in-right {
+  animation: slideInRight 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px) scale(0.97); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px) scale(0.97); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* Step indicator active pulse */
+.step-active {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Staggered child fade-in within reflection steps */
+.slide-in-right > * {
+  animation: childFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.slide-in-right > *:nth-child(1) { animation-delay: 0.05s; }
+.slide-in-right > *:nth-child(2) { animation-delay: 0.1s; }
+.slide-in-right > *:nth-child(3) { animation-delay: 0.15s; }
+.slide-in-right > *:nth-child(4) { animation-delay: 0.2s; }
+
+.slide-in-left > * {
+  animation: childFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.slide-in-left > *:nth-child(1) { animation-delay: 0.05s; }
+.slide-in-left > *:nth-child(2) { animation-delay: 0.1s; }
+.slide-in-left > *:nth-child(3) { animation-delay: 0.15s; }
+.slide-in-left > *:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes childFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Streak badge pulse */
+.streak-pulse {
+  animation: streakPulse 1.5s ease-in-out;
+}
+
+@keyframes streakPulse {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Gold border accent */
+.gold-border {
+  border-color: var(--gold);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 3px;
 }

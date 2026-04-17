@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:apis-prelive.quran.foundation)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.quran.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/quran/quran.com-frontend-next/develop/src/utils/auth/api.ts\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/quran/quran.com-frontend-next/develop/src/utils/auth/constants.ts\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/quran/quran.com-frontend-next/develop/src/utils/apiPaths.ts\")",
+      "Bash(curl -s \"https://api.github.com/repos/quran/quran.com-frontend-next/git/trees/develop?recursive=1\")",
+      "Bash(python3 -c \" import sys, json data = json.load\\(sys.stdin\\) if 'tree' in data: for item in data['tree']: path = item['path'] if any\\(k in path.lower\\(\\) for k in ['auth', 'api', 'bookmark', 'collection', 'streak', 'session', 'profile', 'note', 'reflection', 'post', 'goal', 'activity']\\): if item['type'] == 'blob': print\\(path\\) else: print\\(json.dumps\\(data, indent=2\\)[:500]\\) \")",
+      "Bash(curl -s \"https://api.github.com/repos/quran/quran.com-frontend-next\")",
+      "Bash(curl -s \"https://api.github.com/repos/quran/quran.com-frontend-next/branches?per_page=10\")",
+      "Bash(curl -s \"https://api.github.com/repos/quran/quran.com-frontend-next/git/trees/production?recursive=1\")",
+      "Bash(python3 -c ':*)",
+      "Bash(node -e ':*)",
+      "Bash(node:*)",
+      "Bash(curl:*)",
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:prelive-oauth2.quran.foundation)",
+      "Bash(npm run:*)",
+      "Bash(taskkill:*)",
+      "WebFetch(domain:api-docs.quran.foundation)"
+    ]
+  }
+}
