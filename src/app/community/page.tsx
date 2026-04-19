@@ -173,7 +173,7 @@ export default function CommunityPage() {
           const data = await res.json().catch(() => ({}));
           const msg = data.message || data.error || "Failed to post comment";
           if (res.status === 403) {
-            setCommentError((prev) => ({ ...prev, [postId]: "Commenting requires additional permissions not yet available in pre-live." }));
+            setCommentError((prev) => ({ ...prev, [postId]: "Unable to post comment. Please try again later." }));
           } else {
             setCommentError((prev) => ({ ...prev, [postId]: msg }));
           }

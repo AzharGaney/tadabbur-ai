@@ -4,7 +4,7 @@ function getToken(req: NextRequest) {
   return req.headers.get("authorization")?.replace("Bearer ", "");
 }
 
-const QR_API = process.env.QF_REFLECT_API_URL || "https://apis-prelive.quran.foundation/quran-reflect/v1";
+const QR_API = process.env.QF_REFLECT_API_URL!;
 
 export async function POST(req: NextRequest) {
   const token = getToken(req);
