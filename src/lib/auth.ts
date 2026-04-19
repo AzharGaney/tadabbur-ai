@@ -61,7 +61,7 @@ export function buildAuthorizeURL(params: {
 
   const url = new URL(`${oauthEndpoint}/oauth2/auth`);
   url.searchParams.set("response_type", "code");
-  url.searchParams.set("client_id", "10d965c6-c552-4628-93d7-732987eae77f");
+  url.searchParams.set("client_id", process.env.NEXT_PUBLIC_QF_CLIENT_ID || process.env.QF_CLIENT_ID || "10d965c6-c552-4628-93d7-732987eae77f");
   url.searchParams.set("redirect_uri", redirectUri);
   url.searchParams.set("scope", OAUTH_SCOPES);
   url.searchParams.set("code_challenge", params.codeChallenge);
