@@ -53,14 +53,11 @@ export function buildAuthorizeURL(params: {
   state: string;
   nonce: string;
 }): string {
-  const oauthEndpoint = process.env.NEXT_PUBLIC_APP_URL
-    ? "https://prelive-oauth2.quran.foundation"
-    : "https://prelive-oauth2.quran.foundation";
+  const oauthEndpoint =
+    process.env.NEXT_PUBLIC_QF_OAUTH_ENDPOINT ||
+    "https://prelive-oauth2.quran.foundation";
 
-  const redirectUri =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/callback`
-      : "http://localhost:3000/callback";
+  const redirectUri = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/callback`;
 
   const url = new URL(`${oauthEndpoint}/oauth2/auth`);
   url.searchParams.set("response_type", "code");
