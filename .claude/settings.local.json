@@ -21,7 +21,9 @@
       "WebFetch(domain:prelive-oauth2.quran.foundation)",
       "Bash(npm run:*)",
       "Bash(taskkill:*)",
-      "WebFetch(domain:api-docs.quran.foundation)"
+      "WebFetch(domain:api-docs.quran.foundation)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

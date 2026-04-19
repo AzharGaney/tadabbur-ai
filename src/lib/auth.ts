@@ -42,7 +42,6 @@ const OAUTH_SCOPES = [
   "note",
   "streak",
   "activity_day",
-  "goal",
   "reading_session",
   "post",
   "comment",
