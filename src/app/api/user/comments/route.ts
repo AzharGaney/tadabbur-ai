@@ -19,8 +19,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "postId and body required" }, { status: 400 });
   }
 
-  const url = `${process.env.QF_USER_API_URL}/comments`;
-  const payload = { postId, body };
+  const numericPostId = Number(postId);
+  const url = `${process.env.QF_USER_API_URL}/posts/${numericPostId}/comments`;
+  const payload = { body };
   console.log("[comments POST] →", url, JSON.stringify(payload));
 
   const res = await fetch(url, {
