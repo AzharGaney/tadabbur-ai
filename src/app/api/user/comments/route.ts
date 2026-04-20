@@ -4,7 +4,11 @@ function getToken(req: NextRequest) {
   return req.headers.get("authorization")?.replace("Bearer ", "");
 }
 
-const QR_API = process.env.QF_REFLECT_API_URL!;
+const headers = (token: string) => ({
+  "x-auth-token": token,
+  "x-client-id": process.env.QF_CLIENT_ID!,
+  "Content-Type": "application/json",
+});
 
 export async function POST(req: NextRequest) {
   const token = getToken(req);
@@ -15,18 +19,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "postId and body required" }, { status: 400 });
   }
 
-  // Comments on QR posts go through the QuranReflect API, not the user API
-  const url = `${QR_API}/posts/${postId}/comments`;
-  console.log("[comments POST] →", url, JSON.stringify({ body }));
+  const url = `${process.env.QF_USER_API_URL}/comments`;
+  const payload = { postId, body };
+  console.log("[comments POST] →", url, JSON.stringify(payload));
 
   const res = await fetch(url, {
     method: "POST",
-    headers: {
-      "x-auth-token": token,
-      "x-client-id": process.env.QF_CLIENT_ID!,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ body }),
+    headers: headers(token),
+    body: JSON.stringify(payload),
   });
 
   const resBody = await res.text();
